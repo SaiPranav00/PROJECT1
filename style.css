@@ -1,0 +1,130 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Container */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Header */
+header {
+  background-color: #263238;
+  color: white;
+  padding: 20px 0;
+}
+header .logo {
+  float: left;
+  font-size: 24px;
+}
+header nav {
+  float: right;
+}
+header ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+header a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+header::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(to right, #03a9f4, #00bcd4);
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+}
+.hero h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+.hero-buttons .btn {
+  margin: 10px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  background-color: #ffffff;
+  color: #03a9f4;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.btn:hover {
+  background-color: #f1f1f1;
+}
+.btn.secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+/* Benefits Section */
+.benefits {
+  padding: 60px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+.benefits h3 {
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+.benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+}
+.benefit-card {
+  background-color: #e3f2fd;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* CTA Section */
+.cta {
+  padding: 60px 20px;
+  background-color: #03a9f4;
+  color: white;
+  text-align: center;
+}
+.cta h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.cta .btn {
+  margin: 10px;
+}
+
+/* Footer */
+footer {
+  background-color: #263238;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+}
