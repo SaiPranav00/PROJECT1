@@ -4,14 +4,215 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EVMatch – Electric Vehicle Finder</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #111;
+      color: #eee;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* Header */
+    header {
+      background-color: #000;
+      color: #fff;
+      padding: 20px 0;
+      border-bottom: 3px solid red;
+    }
+
+    header .logo {
+      float: left;
+      font-size: 28px;
+      font-weight: bold;
+      color: red;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    header nav {
+      float: right;
+    }
+
+    header ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    header a:hover {
+      color: red;
+    }
+
+    header::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero video#bgVideo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      letter-spacing: 1.5px;
+      color: red;
+    }
+
+    .hero p {
+      font-size: 20px;
+    }
+
+    .hero-buttons .btn {
+      margin: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: red;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #cc0000;
+    }
+
+    .btn.secondary {
+      background-color: transparent;
+      border: 2px solid red;
+      color: red;
+    }
+
+    .btn.secondary:hover {
+      background-color: red;
+      color: white;
+    }
+    .recommendations {
+      padding: 60px 20px;
+      background-color: #111;
+      text-align: center;
+    }
+    .recommendations h3 {
+      font-size: 32px;
+      color: red;
+      margin-bottom: 40px;
+    }
+    .car-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .car-card {
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid red;
+    }
+    .car-card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .car-card h4 {
+      margin-top: 10px;
+      color: white;
+    }
+
+    /* Benefits Section */
+    .benefits {
+      padding: 80px 20px;
+      background-color: #1b1b1b;
+      text-align: center;
+    }
+
+    .benefits h3 {
+      font-size: 32px;
+      margin-bottom: 40px;
+      color: red;
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 25px;
+    }
+
+    .benefit-card {
+      background-color: #292929;
+      padding: 30px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      border: 1px solid red;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 25px 0;
+      margin-top: 60px;
+      border-top: 3px solid red;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- 🔷 Header -->
+  <!-- Header -->
   <header>
     <div class="container">
-      <h1 class="logo">⚡ EVMatch</h1>
+      <h1 class="logo">⚡EVMatch</h1>
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -19,15 +220,51 @@
           <li><a href="compare.html">Compare</a></li>
           <li><a href="quiz.html">Quiz</a></li>
           <li><a href="map.html">Charging Stations</a></li>
-          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="review.html">Reviews</a></li>
           <li><a href="signin.html">Signin</a></li>
-
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- 🔷 Benefits Section -->
+  <!-- Hero Section with Video Background -->
+  <section class="hero">
+    <video autoplay muted loop id="bgVideo">
+      <source src="back1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-content">
+      <h2>Discover the Future of Driving</h2>
+      <p>Match with your perfect Electric Vehicle today</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn">Explore Now</a>
+        <a href="#" class="btn secondary">Take the Quiz</a>
+      </div>
+    </div>
+  </section>
+  <section class="recommendations">
+    <h3>Recommended EVs</h3>
+    <div class="car-grid">
+      <div class="car-card">
+        <img src="Home1.jpeg" alt="Tata Harrier EV" />
+        <h4>Tata Harrier EV</h4>
+      </div>
+      <div class="car-card">
+        <img src="Home2.jpeg" alt="Mahindra BE 6" />
+        <h4>Mahindra BE 6</h4>
+      </div>
+      <div class="car-card">
+        <img src="Home3.jpeg" alt="Porsche Taycan" />
+        <h4>Porsche Taycan</h4>
+      </div>
+      <div class="car-card">
+        <img src="Home4.jpeg" alt="Audi e-tron GT" />
+        <h4>Audi e-tron GT</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
   <section class="benefits">
     <div class="container">
       <h3>Why Electric?</h3>
@@ -41,7 +278,7 @@
     </div>
   </section>
 
-  <!-- 🔷 Footer -->
+  <!-- Footer -->
   <footer>
     <div class="container">
       <p>&copy; 2025 EVMatch. All rights reserved.</p>
