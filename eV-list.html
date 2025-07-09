@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse EVs - EVMatch</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: black; /* Light background */
+    color: #2d3748; /* Dark text */
+    line-height: 1.6;
+}
+
+/* Navigation */
+.navbar {
+    background: black; /* White background */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #e63946; /* Ferrari Red */
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #4a5568; /* Darker text */
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: black; /* White text */
+    background: #e63946; /* Ferrari Red */
+}
+
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background: #e63946; /* Ferrari Red */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+.logout-btn {
+    color: #a0aec0;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 6px;
+    transition: color 0.3s ease;
+}
+
+.logout-btn:hover {
+    color: #e53e3e; /* Red on hover */
+}
+
+/* Main Content */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Hero Section */
+.hero-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: #2d3748; /* Dark text */
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 20px;
+    color: #718096; /* Gray text */
+    margin-bottom: 32px;
+}
+
+.hero-image {
+    text-align: center;
+}
+
+.hero-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #e63946 0%, grey 100%); /* Ferrari Red gradient */
+    color: black;
+    border: none;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(230, 57, 70, 0.3); /* Shadow effect */
+}
+
+.btn-secondary {
+    background: black;
+    color: #4a5568; /* Darker text */
+    border: 2px solid red; /* Light border */
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: black; /* Light background on hover */
+    border-color: red; /* Light border on hover */
+    transform: translateY(-1px);
+}
+
+/* Stats Section */
+.stats-section {
+    margin-bottom: 80px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+}
+
+.stat-card {
+    background: black;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #e63946 0%, #764ba2 100%); /* Ferrari Red gradient */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 24px;
+}
+
+.stat-content h3 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2d3748; /* Dark text */
+    margin-bottom: 4px;
+}
+
+.stat-content p {
+    color: #718096; /* Gray text */
+    font-weight: 500;
+}
+
+/* Section Headers */
+.section-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.section-header h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #2d3748; /* Dark text */
+    margin-bottom: 16px;
+}
+
+.section-header p {
+    font-size: 18px;
+    color: #718096; /* Gray text */
+}
+
+/* Features Section */
+.features-section {
+    margin-bottom: 80px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+}
+
+.feature-card {
+    background: black;
+    padding: 40px 32px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #e63946 0%, #764ba2 100%); /* Ferrari Red gradient */
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 32px;
+    margin: 0 auto 24px;
+}
+
+.feature-card h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2d3748; /* Dark text */
+    margin-bottom: 16px;
+}
+
+.feature-card p {
+    color: #718096; /* Gray text */
+    line-height: 1.6;
+}
+
+/* EV Cards */
+.evs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.ev-card {
+    background: black;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.ev-card:hover {
+    transform: translateY(-4px);
+}
+
+.ev-image {
+    width: 100%;
+    height: 200px;
+    background: black; /* Light background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.ev-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ev-content {
+    padding: 24px;
+}
+
+.ev-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.ev-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2d3748; /* Dark text */
+    margin-bottom: 4px;
+}
+
+.ev-make {
+    color: #718096; /* Gray text */
+    font-size: 14px;
+}
+
+.ev-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e63946; /* Ferrari Red */
+}
+
+.ev-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.spec-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #4a5568; /* Darker text */
+}
+
+.spec-item i {
+    color: #e63946; /* Ferrari Red */
+    width: 16px;
+}
+
+.ev-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-compare {
+    background: black; /* Light background */
+    color: #4a5568; /* Darker text */
+}
+
+.btn-compare:hover {
+    background: black; /* Light background on hover */
+}
+
+.btn-details {
+    background: #e63946; /* Ferrari Red */
+    color: black;
+}
+
+.btn-details:hover {
+    background: #5a67d8; /* Darker shade on hover */
+}
+
+/* Browse Page Styles */
+.browse-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.browse-header h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #2d3748; /* Dark text */
+    margin-bottom: 12px;
+}
+
+.browse-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+}
+
+.filters-sidebar {
+    background: black; /* White background */
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    height: fit-content;
+    position: sticky;
+    top: 90px;
+}
+
+.filter-section {
+    margin-bottom: 32px;
+}
+
+.filter-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748; /* Dark text */
+    margin-bottom: 16px;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0; /* Gray icon */
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 16px 12px 44px;
+    border: 2px solid red; /* Light border */
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #e63946; /* Ferrari Red */
+}
+
+.price-range,
+.range-filter {
+    margin-bottom: 12px;
+}
+
+.price-range input,
+.range-filter input {
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.price-display,
+.range-display {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #718096; /* Gray text */
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #4a5568; /* Darker text */
+    cursor: pointer;
+}
+
+.clear-filters-btn {
+    width: 100%;
+    padding: 12px;
+    background: #fed7d7; /* Light red */
+    color: #c53030; /* Dark red */
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.clear-filters-btn:hover {
+    background: red; /* Darker red on hover */
+}
+
+.results-section {
+    background: black; /* White background */
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid red; /* Light border */
+}
+
+.results-info {
+    font-weight: 500;
+    color: #4a5568; /* Darker text */
+}
+
+.sort-options select {
+    padding: 8px 12px;
+    border: 2px solid red; /* Light border */
+    border-radius: 8px;
+    background: black; /* White background */
+    font-size: 14px;
+}
+
+.load-more {
+    text-align: center;
+    margin-top: 32px;
+}
+
+/* Compare Page Styles */
+.compare-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.compare-selector {
+    margin-bottom: 40px;
+}
+
+.selector-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+}
+
+.vehicle-selector {
+    background: black; /* White background */
+    border: 2px dashed red; /* Light border */
+    border-radius: 16px;
+    padding: 40px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vehicle-selector:hover {
+    border-color: #e63946; /* Ferrari Red */
+    background: black; /* Light background on hover */
+}
+
+.selector-placeholder i {
+    font-size: 32px;
+    color: #a0aec0; /* Gray icon */
+    margin-bottom: 12px;
+    display: block;
+}
+
+.selector-placeholder span {
+    color: #718096; /* Gray text */
+    font-weight: 500;
+}
+
+.vs-divider {
+    background: #e63946; /* Ferrari Red */
+    color: black;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.comparison-table {
+    background: black; /* White background */
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr 1fr;
+    background: black; /* Light background */
+    border-bottom: 2px solid red; /* Light border */
+}
+
+.spec-column,
+.vehicle-column {
+    padding: 20px;
+    font-weight: 600;
+    color: #2d3748; /* Dark text */
+}
+
+.spec-column {
+    background: black; /* Light background */
+    border-right: 2px solid red; /* Light border */
+}
+
+.table-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.comparison-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr 1fr;
+    border-bottom: 1px solid #f70000; /* Light border */
+}
+
+.comparison-row:last-child {
+    border-bottom: none;
+}
+
+.spec-label {
+    padding: 16px 20px;
+    background: black; /* Light background */
+    border-right: 2px solid red; /* Light border */
+    font-weight: 500;
+    color: #242424; /* Darker text */
+}
+
+.spec-value {
+    padding: 16px 20px;
+    color: black; /* Dark text */
+    display: flex;
+    align-items: center;
+}
+
+.popular-comparisons {
+    margin-top: 60px;
+}
+
+.popular-comparisons h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: red; /* Dark text */
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.comparison-suggestions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.suggestion-card {
+    background: black; /* White background */
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0);
+}
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-bolt"></i>
+                <span>EVMatch</span>
+            </div>
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="browse.html" class="nav-link active">Browse EVs</a>
+                <a href="compare.html" class="nav-link">Compare</a>
+                <a href="quiz.html" class="nav-link">Find My EV</a>
+                <a href="charging.html" class="nav-link">Charging Stations</a>
+            </div>
+            <div class="nav-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span>Welcome, Admin</span>
+                <a href="index.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="browse-header">
+            <h1>Browse Electric Vehicles</h1>
+            <p>Discover the perfect EV from our comprehensive database</p>
+        </div>
+
+        <div class="browse-container">
+            <aside class="filters-sidebar">
+                <div class="filter-section">
+                    <h3>Search</h3>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search by make, model...">
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Price Range</h3>
+                    <div class="price-range">
+                        <input type="range" id="priceRange" min="20000" max="150000" value="150000">
+                        <div class="price-display">
+                            <span>$20,000</span>
+                            <span id="maxPrice">$150,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Make</h3>
+                    <div class="checkbox-group" id="makeFilters">
+                        <label><input type="checkbox" value="Tesla"> Tesla</label>
+                        <label><input type="checkbox" value="BMW"> BMW</label>
+                        <label><input type="checkbox" value="Audi"> Audi</label>
+                        <label><input type="checkbox" value="Mercedes"> Mercedes</label>
+                        <label><input type="checkbox" value="Volkswagen"> Volkswagen</label>
+                        <label><input type="checkbox" value="Nissan"> Nissan</label>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Body Type</h3>
+                    <div class="checkbox-group" id="bodyTypeFilters">
+                        <label><input type="checkbox" value="Sedan"> Sedan</label>
+                        <label><input type="checkbox" value="SUV"> SUV</label>
+                        <label><input type="checkbox" value="Hatchback"> Hatchback</label>
+                        <label><input type="checkbox" value="Coupe"> Coupe</label>
+                        <label><input type="checkbox" value="Truck"> Truck</label>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Range (miles)</h3>
+                    <div class="range-filter">
+                        <input type="range" id="rangeFilter" min="100" max="500" value="500">
+                        <div class="range-display">
+                            <span>100+ miles</span>
+                            <span id="maxRange">500+ miles</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="clear-filters-btn" onclick="clearFilters()">
+                    <i class="fas fa-times"></i>
+                    Clear Filters
+                </button>
+            </aside>
+
+            <div class="results-section">
+                <div class="results-header">
+                    <div class="results-info">
+                        <span id="resultsCount">Loading...</span>
+                    </div>
+                    <div class="sort-options">
+                        <select id="sortSelect">
+                            <option value="name">Sort by Name</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="range">Range: High to Low</option>
+                            <option value="efficiency">Efficiency</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="results-grid" id="resultsGrid">
+                    <!-- EV cards will be loaded here -->
+                </div>
+
+                <div class="load-more">
+                    <button class="btn-secondary" onclick="loadMoreResults()">
+                        Load More Results
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="main-app.js"></script>
+    <script src="browse.js"></script>
+</body>
+</html>
